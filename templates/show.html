@@ -7,7 +7,14 @@
 </head>
 
 <body>
-    <img src="/img/sample.png">
+    {{range $v := .}}
+    <div>
+        <label>{{$v.Name}}</label>
+        <div>
+            <img src="/img/{{$v.Name}}" width="20%" />
+        </div>
+    </div>
+    {{end}}
 </body>
 
 </html>

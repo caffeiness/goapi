@@ -1,9 +1,9 @@
 package http
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 
@@ -53,8 +53,10 @@ func upload(c echo.Context) error {
 
 func show(c echo.Context) error {
 	files, _ := ioutil.ReadDir("img")
-	for _, f := range files {
-		fmt.Println(f.Name())
-	}
-	return c.HTML(http.StatusOK, "OK")
+	return c.Render(http.StatusOK, "show.html", files)
+}
+
+func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	log.Println(t.templates, name, data)
+	return t.templates.ExecuteTemplate(w, name, data)
 }
