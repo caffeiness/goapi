@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -12,8 +13,8 @@ import (
 
 func upload(c echo.Context) error {
 	// Read form fields
-	//name := c.FormValue("name")
-	//discription := c.FormValue("discription")
+	name := c.FormValue("name")
+	discription := c.FormValue("discription")
 
 	//------------
 	// Read files
@@ -47,8 +48,8 @@ func upload(c echo.Context) error {
 		}
 	}
 
-	//return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and discription=%s.</p>", len(files), name, discription))
-	return c.File("templates/show.html")
+	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and discription=%s.</p>", len(files), name, discription))
+	//return c.File("templates/show.html")
 }
 
 func show(c echo.Context) error {
