@@ -14,8 +14,6 @@ import (
 func upload(c echo.Context) error {
 	// Read form fields
 	name := c.FormValue("name")
-	discription := c.FormValue("discription")
-
 	//------------
 	// Read files
 	//------------
@@ -48,7 +46,7 @@ func upload(c echo.Context) error {
 		}
 	}
 
-	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and discription=%s.</p>", len(files), name, discription))
+	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s.</p>", len(files), name))
 	//return c.File("templates/show.html")
 }
 
@@ -60,4 +58,14 @@ func show(c echo.Context) error {
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	log.Println(t.templates, name, data)
 	return t.templates.ExecuteTemplate(w, name, data)
+}
+
+func delete(c echo.Context) error {
+	name := c.FormValue("del_name")
+	r := os.Remove("img/" + name)
+	if r != nil {
+		return r
+	}
+	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Deleted successfully name=%s .</p>", name))
+
 }

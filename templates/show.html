@@ -7,6 +7,9 @@
 </head>
 
 <body>
+    <form action="/delete" method="POST">
+        Name: <input type="text" name="del_name">
+    </form>
     {{range $v := .}}
     <div>
         <label>{{$v.Name}}</label>

@@ -35,5 +35,6 @@ func Run() {
 	e.Static("/", "templates")
 	e.POST("/upload", upload)
 	e.GET("/show", show)
+	e.POST("/delete", delete)
 	e.Logger.Fatal(e.Start(":1232"))
 }
